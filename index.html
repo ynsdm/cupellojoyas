@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyería Cupello | Alta Orfebrería, Diamantes & Joyas Exclusivas 💎</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            light: '#fef08a',
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#eab308',
+                            champagne: '#D4AF37',
+                            dark: '#a16207',
+                            rich: '#b45309'
+                        },
+                        obsidian: {
+                            950: '#090a0f',
+                            900: '#11131a',
+                            800: '#1a1d26',
+                            700: '#272b38'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #090a0f;
+            color: #f3f4f6;
+        }
+        h1, h2, h3, .font-serif-luxury {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+        .hero-gold-gradient {
+            background: linear-gradient(180deg, rgba(9, 10, 15, 0.75) 0%, rgba(9, 10, 15, 0.95) 85%, #090a0f 100%),
+                        url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+        .gold-border-glow {
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+        }
+        .gold-text-glow {
+            text-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #11131a;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between custom-scrollbar selection:bg-gold-champagne selection:text-black">
+
+    <!-- HEADER NAV -->
+    <header class="sticky top-0 z-40 bg-obsidian-950/90 backdrop-blur-md border-b border-gold-champagne/20 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" onclick="switchTab('home')" class="flex items-center space-x-3 group">
+                <div class="w-11 h-11 rounded-full border border-gold-champagne/40 bg-gradient-to-tr from-obsidian-800 to-obsidian-900 flex items-center justify-center shadow-lg shadow-gold-champagne/10 group-hover:scale-105 transition-all duration-300">
+                    <i data-lucide="gem" class="w-5 h-5 text-gold-champagne"></i>
+                </div>
+                <div>
+                    <span class="text-2xl sm:text-3xl font-serif font-extrabold tracking-widest uppercase bg-gradient-to-r from-amber-200 via-gold-champagne to-amber-500 bg-clip-text text-transparent block">
+                        CUPELLO
+                    </span>
+                    <span class="text-[9px] sm:text-[10px] text-amber-300 font-semibold tracking-[0.3em] uppercase block -mt-1 opacity-90">
+                        Alta Joyería & Orfebrería
+                    </span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm uppercase tracking-widest font-medium">
+                <button onclick="switchTab('home')" id="nav-home" class="nav-link text-gold-champagne hover:text-amber-200 transition-colors">Inicio</button>
+                <button onclick="switchTab('catalog')" id="nav-catalog" class="nav-link text-gray-300 hover:text-gold-champagne transition-colors">Colecciones</button>
+                <a href="#taller" onclick="switchTab('home')" class="text-gray-300 hover:text-gold-champagne transition-colors">Taller a Medida</a>
+                <a href="#garantia" onclick="switchTab('home')" class="text-gray-300 hover:text-gold-champagne transition-colors">Garantía</a>
+                <a href="#contacto" class="text-gray-300 hover:text-gold-champagne transition-colors">Contacto</a>
+            </nav>
+
+            <!-- Actions Right -->
+            <div class="flex items-center space-x-3">
+                <!-- Cart/Selection Button -->
+                <button onclick="openCartModal()" class="relative p-2.5 rounded-full bg-obsidian-800/80 text-gold-champagne hover:bg-obsidian-700 hover:text-amber-200 transition border border-gold-champagne/30">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-amber-500 text-black text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center scale-0 transition-transform duration-300">0</span>
+                </button>
+
+                <!-- Primary CTA PEDIDOS / COTIZAR -->
+                <button onclick="openOrdersModal()" class="relative inline-flex items-center justify-center px-5 py-2.5 text-xs sm:text-sm font-bold tracking-widest text-black bg-gradient-to-r from-amber-200 via-gold-champagne to-amber-500 rounded-lg shadow-lg shadow-gold-champagne/20 hover:shadow-gold-champagne/40 hover:scale-105 active:scale-95 transition duration-200 uppercase">
+                    <i data-lucide="sparkles" class="w-4 h-4 mr-1.5"></i>
+                    <span>PEDIDOS / COTIZAR</span>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg text-gray-300 hover:text-white hover:bg-obsidian-800">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-obsidian-900 border-b border-obsidian-800 px-6 pt-3 pb-6 space-y-4 uppercase text-xs tracking-widest">
+            <button onclick="switchTab('home'); toggleMobileMenu()" class="block w-full text-left py-2 font-semibold text-gold-champagne">Inicio</button>
+            <button onclick="switchTab('catalog'); toggleMobileMenu()" class="block w-full text-left py-2 font-semibold text-gray-300 hover:text-gold-champagne">Ver Colecciones</button>
+            <a href="#taller" onclick="switchTab('home'); toggleMobileMenu()" class="block py-2 font-semibold text-gray-300 hover:text-gold-champagne">Taller Artesanal</a>
+            <a href="#garantia" onclick="switchTab('home'); toggleMobileMenu()" class="block py-2 font-semibold text-gray-300 hover:text-gold-champagne">Garantía & Calidad</a>
+            <a href="#contacto" onclick="toggleMobileMenu()" class="block py-2 font-semibold text-gray-300 hover:text-gold-champagne">Ubicación y Contacto</a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow">
+        
+        <!-- VIEW 1: LANDING PAGE VIEW -->
+        <div id="view-home" class="view-content space-y-24">
+            
+            <!-- HERO SECTION -->
+            <section class="relative min-h-[90vh] flex items-center justify-center hero-gold-gradient pt-12 pb-24 px-4 sm:px-6">
+                <div class="max-w-5xl mx-auto text-center space-y-8 relative z-10">
+                    
+                    <!-- Luxe Badge -->
+                    <div class="inline-flex items-center space-x-2 px-5 py-2 rounded-full bg-obsidian-900/80 border border-gold-champagne/40 text-gold-champagne text-xs font-semibold tracking-widest uppercase backdrop-blur-md">
+                        <i data-lucide="crown" class="w-4 h-4 text-amber-300"></i>
+                        <span>Piezas Exclusivas de Autor • Oro 18K & Plata Ley 925</span>
+                    </div>
+
+                    <!-- Main Headline -->
+                    <h1 class="text-4xl sm:text-6xl md:text-7xl font-serif font-extrabold tracking-tight text-white leading-tight">
+                        Elegancia Eterna, <br class="hidden sm:inline">
+                        <span class="bg-gradient-to-r from-amber-100 via-gold-champagne to-amber-500 bg-clip-text text-transparent gold-text-glow">El Lujo Hecho Joya</span>
+                    </h1>
+
+                    <!-- Subheadline -->
+                    <p class="text-base sm:text-xl text-gray-300 max-w-3xl mx-auto font-light leading-relaxed tracking-wide">
+                        Creamos y seleccionamos piezas memorables para inmortalizar tus momentos más especiales. Anillos de compromiso, cadenas italianas, dijes en oro puro y orfebrería personalizada a medida.
+                    </p>
+
+                    <!-- Call To Action Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-5 pt-4">
+                        <button onclick="openOrdersModal()" class="w-full sm:w-auto px-9 py-4 text-sm font-bold tracking-widest text-black bg-gradient-to-r from-amber-200 via-gold-champagne to-amber-500 rounded-xl shadow-xl shadow-gold-champagne/20 hover:scale-105 active:scale-95 transition duration-200 uppercase flex items-center justify-center space-x-3">
+                            <i data-lucide="sparkles" class="w-5 h-5"></i>
+                            <span>PEDIDOS / COTIZAR</span>
+                        </button>
+                        
+                        <button onclick="switchTab('catalog')" class="w-full sm:w-auto px-9 py-4 text-sm font-bold tracking-widest text-gold-champagne bg-obsidian-900/80 border border-gold-champagne/40 rounded-xl backdrop-blur-md hover:bg-obsidian-800 hover:border-gold-champagne transition duration-200 uppercase flex items-center justify-center space-x-3">
+                            <i data-lucide="gem" class="w-5 h-5"></i>
+                            <span>Explorar Colección</span>
+                        </button>
+                    </div>
+
+                    <!-- Trust Pillars -->
+                    <div class="pt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto text-left">
+                        <div class="p-5 rounded-2xl bg-obsidian-900/80 border border-obsidian-800 backdrop-blur-md flex items-center space-x-4">
+                            <i data-lucide="shield-check" class="w-8 h-8 text-gold-champagne flex-shrink-0"></i>
+                            <div>
+                                <h4 class="text-xs font-bold text-white uppercase tracking-wider">Oro Certificado</h4>
+                                <p class="text-[11px] text-gray-400">18K y Ley 950 garantizada</p>
+                            </div>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-obsidian-900/80 border border-obsidian-800 backdrop-blur-md flex items-center space-x-4">
+                            <i data-lucide="pen-tool" class="w-8 h-8 text-gold-champagne flex-shrink-0"></i>
+                            <div>
+                                <h4 class="text-xs font-bold text-white uppercase tracking-wider">Diseños A Medida</h4>
+                                <p class="text-[11px] text-gray-400">Taller de orfebrería propio</p>
+                            </div>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-obsidian-900/80 border border-obsidian-800 backdrop-blur-md flex items-center space-x-4">
+                            <i data-lucide="truck" class="w-8 h-8 text-gold-champagne flex-shrink-0"></i>
+                            <div>
+                                <h4 class="text-xs font-bold text-white uppercase tracking-wider">Envíos Asegurados</h4>
+                                <p class="text-[11px] text-gray-400">Entregas discretas y seguras</p>
+                            </div>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-obsidian-900/80 border border-obsidian-800 backdrop-blur-md flex items-center space-x-4">
+                            <i data-lucide="award" class="w-8 h-8 text-gold-champagne flex-shrink-0"></i>
+                            <div>
+                                <h4 class="text-xs font-bold text-white uppercase tracking-wider">Mantenimiento</h4>
+                                <p class="text-[11px] text-gray-400">Limpieza y grabado gratis</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- FEATURED HIGHLIGHTS -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center space-y-4 mb-16">
+                    <span class="text-gold-champagne text-xs font-semibold uppercase tracking-[0.3em]">Selección Exclusiva</span>
+                    <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white">Piezas Icono de la Casa</h2>
+                    <p class="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">Cada joya es trabajada con absoluta precisión, gemas seleccionadas y acabados pulidos a mano.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Feature Card 1 -->
+                    <div class="group relative rounded-2xl overflow-hidden bg-obsidian-900 border border-obsidian-800 hover:border-gold-champagne/60 transition-all duration-500 gold-border-glow">
+                        <div class="h-72 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80" alt="Anillo Solitario Diamante" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <span class="absolute top-4 right-4 bg-obsidian-950/90 text-gold-champagne border border-gold-champagne/40 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Novedad</span>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="space-y-1">
+                                <span class="text-[11px] text-amber-400 font-semibold uppercase tracking-widest">Anillos de Compromiso</span>
+                                <h3 class="text-xl font-serif font-bold text-white">Solitario Imperial Oro Blanco 18K</h3>
+                            </div>
+                            <p class="text-gray-400 text-xs leading-relaxed">Soberbio diamante de corte brillante montado en bisel de oro blanco refinado de 18 quilates.</p>
+                            <div class="flex items-center justify-between pt-2 border-t border-obsidian-800">
+                                <div>
+                                    <span class="text-xs text-gray-500 block uppercase">Desde</span>
+                                    <span class="text-xl font-extrabold text-gold-champagne">$1.250.000 CLP</span>
+                                </div>
+                                <button onclick="addToCartDirect('Solitario Imperial Oro Blanco 18K', 1250000)" class="p-3 bg-gold-champagne/10 text-gold-champagne hover:bg-gold-champagne hover:text-black rounded-xl font-bold transition">
+                                    <i data-lucide="plus" class="w-5 h-5"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feature Card 2 -->
+                    <div class="group relative rounded-2xl overflow-hidden bg-obsidian-900 border border-obsidian-800 hover:border-gold-champagne/60 transition-all duration-500 gold-border-glow">
+                        <div class="h-72 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80" alt="Cadena Tejido Italiano Oro 18k" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <span class="absolute top-4 right-4 bg-gold-champagne text-black font-extrabold text-[10px] px-3 py-1 rounded-full uppercase tracking-wider">Más Cotizado</span>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="space-y-1">
+                                <span class="text-[11px] text-amber-400 font-semibold uppercase tracking-widest">Cadenas & Dijes</span>
+                                <h3 class="text-xl font-serif font-bold text-white">Cadena Cubana Oro Amarillo 18K</h3>
+                            </div>
+                            <p class="text-gray-400 text-xs leading-relaxed">Tejido pesado italiano de alta resistencia con broche de seguridad reforzado y acabado espejado.</p>
+                            <div class="flex items-center justify-between pt-2 border-t border-obsidian-800">
+                                <div>
+                                    <span class="text-xs text-gray-500 block uppercase">Desde</span>
+                                    <span class="text-xl font-extrabold text-gold-champagne">$890.000 CLP</span>
+                                </div>
+                                <button onclick="addToCartDirect('Cadena Cubana Oro Amarillo 18K', 890000)" class="p-3 bg-gold-champagne/10 text-gold-champagne hover:bg-gold-champagne hover:text-black rounded-xl font-bold transition">
+                                    <i data-lucide="plus" class="w-5 h-5"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feature Card 3 -->
+                    <div class="group relative rounded-2xl overflow-hidden bg-obsidian-900 border border-obsidian-800 hover:border-gold-champagne/60 transition-all duration-500 gold-border-glow">
+                        <div class="h-72 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1611591475281-8d9954d26e1d?auto=format&fit=crop&w=800&q=80" alt="Pulsera Riviera Diamantes" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <span class="absolute top-4 right-4 bg-obsidian-950/90 text-gold-champagne border border-gold-champagne/40 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Exclusivo</span>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="space-y-1">
+                                <span class="text-[11px] text-amber-400 font-semibold uppercase tracking-widest">Pulseras & Esclavas</span>
+                                <h3 class="text-xl font-serif font-bold text-white">Pulsera Riviera Tennis Oro Rosado</h3>
+                            </div>
+                            <p class="text-gray-400 text-xs leading-relaxed">Engaste continuo de circonias grado premium o diamantes naturales sobre delicada montura de oro rosado.</p>
+                            <div class="flex items-center justify-between pt-2 border-t border-obsidian-800">
+                                <div>
+                                    <span class="text-xs text-gray-500 block uppercase">Desde</span>
+                                    <span class="text-xl font-extrabold text-gold-champagne">$680.000 CLP</span>
+                                </div>
+                                <button onclick="addToCartDirect('Pulsera Riviera Tennis Oro Rosado', 680000)" class="p-3 bg-gold-champagne/10 text-gold-champagne hover:bg-gold-champagne hover:text-black rounded-xl font-bold transition">
+                                    <i data-lucide="plus" class="w-5 h-5"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center pt-12">
+                    <button onclick="switchTab('catalog')" class="inline-flex items-center space-x-3 text-gold-champagne font-bold tracking-widest hover:text-amber-200 uppercase text-sm border-b border-gold-champagne/40 pb-1 hover:border-gold-champagne transition">
+                        <span>Ver todas las colecciones y joyería disponible</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- TALLER DE ORFEBRERÍA & DEDICATORIA -->
+            <section id="taller" class="bg-gradient-to-b from-obsidian-900 to-obsidian-950 border-y border-obsidian-800/80 py-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <span class="text-amber-400 font-semibold uppercase tracking-[0.2em] text-xs block">Taller Artesanal Cupello</span>
+                        <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white leading-tight">¿Tienes un diseño en mente? Lo creamos para ti.</h2>
+                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed font-light">
+                            En <strong class="text-gold-champagne">Joyería Cupello</strong> convertimos tus ideas, dibujos o referencias en obras maestras tangibles. Contamos con tecnología de modelado 3D e impresiones en cera perdible junto al fundido artesanal en metal precioso.
+                        </p>
+                        
+                        <div class="space-y-3 pt-2 text-xs sm:text-sm text-gray-300">
+                            <div class="flex items-start space-x-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-gold-champagne flex-shrink-0 mt-0.5"></i>
+                                <span><strong>Fundición de Joyas Antiguas:</strong> Reutilizamos tu propio oro para crear una joya nueva totalmente personalizada.</span>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-gold-champagne flex-shrink-0 mt-0.5"></i>
+                                <span><strong>Grabados Láser de Alta Precisión:</strong> Iniciales, fechas memorables o huellas dactilares.</span>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-gold-champagne flex-shrink-0 mt-0.5"></i>
+                                <span><strong>Ajuste de Medida & Mantenimiento:</strong> Pulido, baño de rodio y engaste de gemas.</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-4">
+                            <button onclick="openOrdersModal()" class="px-8 py-3.5 bg-gradient-to-r from-amber-200 via-gold-champagne to-amber-500 text-black font-extrabold rounded-xl shadow-lg hover:scale-105 transition uppercase tracking-widest text-xs flex items-center space-x-2">
+                                <i data-lucide="pen-tool" class="w-4 h-4"></i>
+                                <span>Cotizar Joya Personalizada</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <div class="rounded-3xl overflow-hidden border border-gold-champagne/30 shadow-2xl relative">
+                            <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80" alt="Taller de Joyería Artesanal" class="w-full h-auto object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-transparent to-transparent"></div>
+                        </div>
+                        <div class="absolute -bottom-6 -left-6 bg-obsidian-900 border border-gold-champagne/40 text-white p-6 rounded-2xl shadow-2xl hidden sm:block max-w-xs">
+                            <i data-lucide="quote" class="w-6 h-6 text-gold-champagne mb-2"></i>
+                            <p class="font-serif italic text-xs text-gray-300">"Cada gramo de oro es moldeado con el respeto que merece tu historia personal."</p>
+                            <span class="block text-[10px] text-amber-400 font-bold uppercase tracking-widest mt-2">— Maestro Orfebre Cupello</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- GARANTÍA & CERTIFICACIÓN -->
+            <section id="garantia" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-obsidian-900 border border-gold-champagne/20 rounded-3xl p-8 sm:p-12 text-center space-y-6 relative overflow-hidden">
+                    <div class="max-w-3xl mx-auto space-y-4">
+                        <i data-lucide="award" class="w-12 h-12 text-gold-champagne mx-auto"></i>
+                        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-white">Certificación & Respaldo de Autenticidad</h2>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            En Joyería Cupello, cada pieza se entrega con su certificado físico que acredita la pureza del metal (Oro 18K / Plata Ley 925) y las especificaciones exactas de las piedras montadas. Garantizamos de por vida la autenticidad de los materiales.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- VIEW 2: CATALOG / COLLECTIONS GALLERY VIEW -->
+        <div id="view-catalog" class="view-content hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+            
+            <!-- Catalog Header Banner -->
+            <div class="bg-gradient-to-r from-obsidian-800 via-obsidian-900 to-obsidian-950 border border-gold-champagne/30 rounded-3xl p-8 sm:p-12 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="space-y-2 text-center md:text-left">
+                    <span class="text-gold-champagne text-xs font-bold uppercase tracking-[0.3em]">Catálogo de Alta Gama</span>
+                    <h1 class="text-3xl sm:text-5xl font-serif font-bold text-white">Colecciones Exclusivas</h1>
+                    <p class="text-gray-400 text-sm max-w-xl">Filtra entre nuestras finas piezas disponibles para entrega inmediata o elaboración bajo pedido.</p>
+                </div>
+                <button onclick="openOrdersModal()" class="px-6 py-3.5 bg-gradient-to-r from-amber-200 via-gold-champagne to-amber-500 text-black font-extrabold rounded-xl shadow-lg transition flex items-center space-x-2 text-xs uppercase tracking-widest whitespace-nowrap">
+                    <i data-lucide="message-square" class="w-4 h-4"></i>
+                    <span>Consultar Disponibilidad</span>
+                </button>
+            </div>
+
+            <!-- Search & Filters Bar -->
+            <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+                <!-- Search Input -->
+                <div class="relative w-full md:w-80">
+                    <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3.5 text-gray-500"></i>
+                    <input type="text" id="catalog-search" oninput="filterCatalog()" placeholder="Buscar anillo, cadena, oro 18k..." class="w-full pl-10 pr-4 py-3 bg-obsidian-900 border border-obsidian-800 rounded-xl text-white text-sm placeholder-gray-500 focus:outline-none focus:border-gold-champagne">
+                </div>
+
+                <!-- Filter Pills -->
+                <div class="flex overflow-x-auto w-full md:w-auto space-x-2 pb-2 md:pb-0 custom-scrollbar">
+                    <button onclick="filterCategory('all')" class="cat-btn active border px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap bg-gold-champagne text-black border-gold-champagne uppercase tracking-wider">Todas las Joyas</button>
+                    <button onclick="filterCategory('anillos')" class="cat-btn border px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap bg-obsidian-900 text-gray-300 border-obsidian-800 hover:border-gold-champagne/50 uppercase tracking-wider">Anillos & Compromiso</button>
+                    <button onclick="filterCategory('cadenas')" class="cat-btn border px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap bg-obsidian-900 text-gray-300 border-obsidian-800 hover:border-gold-champagne/50 uppercase tracking-wider">Cadenas & Dijes</button>
+                    <button onclick="filterCategory('pulseras')" class="cat-btn border px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap bg-obsidian-900 text-gray-300 border-obsidian-800 hover:border-gold-champagne/50 uppercase tracking-wider">Pulseras & Esclavas</button>
+                    <button onclick="filterCategory('zarcillos')" class="cat-btn border px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap bg-obsidian-900 text-gray-300 border-obsidian-800 hover:border-gold-champagne/50 uppercase tracking-wider">Zarcillos & Aretes</button>
+                    <button onclick="filterCategory('relojes')" class="cat-btn border px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap bg-obsidian-900 text-gray-300 border-obsidian-800 hover:border-gold-champagne/50 uppercase tracking-wider">Relojería Fina</button>
+                </div>
+            </div>
+
+            <!-- CATALOG GRID -->
+            <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Dynamically Populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- CONTACT & LOCATION -->
+        <section id="contacto" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-obsidian-800">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Box 1 -->
+                <div class="bg-obsidian-900 p-8 rounded-2xl border border-obsidian-800 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-gold-champagne/10 text-gold-champagne flex items-center justify-center">
+                        <i data-lucide="map-pin" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-serif font-bold text-white">Atención en Atelier / Showroom</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">Atención personalizada previa cita para asesorías de alianzas de boda y alta joyería.</p>
+                    <a href="https://instagram.com/joyeria_cupello" target="_blank" class="inline-flex items-center space-x-1 text-xs text-gold-champagne hover:underline font-semibold">
+                        <span>Ver Perfil @joyeria_cupello</span>
+                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <!-- Box 2 -->
+                <div class="bg-obsidian-900 p-8 rounded-2xl border border-obsidian-800 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-gold-champagne/10 text-gold-champagne flex items-center justify-center">
+                        <i data-lucide="clock" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-serif font-bold text-white">Horario de Consultas</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">Lunes a Sábado: 09:30 AM - 07:00 PM<br>Respuesta rápida vía WhatsApp</p>
+                    <span class="inline-block px-3 py-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-bold rounded-full uppercase tracking-wider">Atención Digital Activa</span>
+                </div>
+
+                <!-- Box 3 -->
+                <div class="bg-obsidian-900 p-8 rounded-2xl border border-obsidian-800 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-gold-champagne/10 text-gold-champagne flex items-center justify-center">
+                        <i data-lucide="message-circle" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-serif font-bold text-white">Canales Directos</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">WhatsApp Asesoría: Contacto directo<br>Instagram DM: @joyeria_cupello</p>
+                    <a href="https://wa.me/584140000000?text=Hola%20Joyer%C3%ADa%20Cupello,%20deseo%20m%C3%A1s%20informaci%C3%B3n" target="_blank" class="inline-flex items-center space-x-1 text-xs text-gold-champagne hover:underline font-semibold">
+                        <span>Iniciar conversación en WhatsApp</span>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-obsidian-950 border-t border-obsidian-900 py-10">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-6">
+            <div class="space-y-1">
+                <span class="text-2xl font-serif font-extrabold tracking-widest text-gold-champagne uppercase">CUPELLO</span>
+                <p class="text-xs text-gray-500 uppercase tracking-widest">Alta Joyería • Orfebrería Fina • Diamantes</p>
+            </div>
+            <p class="text-xs text-gray-600">© 2026 Joyería Cupello. Todos los derechos reservados. @joyeria_cupello</p>
+            <div class="flex justify-center space-x-5 text-gray-400">
+                <a href="https://instagram.com/joyeria_cupello" target="_blank" class="hover:text-gold-champagne transition">
+                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                </a>
+                <a href="https://wa.me/584140000000" target="_blank" class="hover:text-gold-champagne transition">
+                    <i data-lucide="message-circle" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL 1: "PEDIDOS / COTIZAR" MODAL -->
+    <div id="modal-orders" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
+        <div class="bg-obsidian-900 border border-gold-champagne/40 rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 relative shadow-2xl gold-border-glow">
+            <!-- Close Button -->
+            <button onclick="closeOrdersModal()" class="absolute top-5 right-5 p-2 text-gray-400 hover:text-white rounded-full bg-obsidian-800">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="text-center space-y-2 pt-2">
+                <div class="w-16 h-16 bg-gold-champagne/10 border border-gold-champagne/30 text-gold-champagne rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i data-lucide="gem" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-2xl font-serif font-bold text-white">Atención & Cotizaciones</h3>
+                <p class="text-xs text-gray-400 max-w-xs mx-auto">Selecciona la modalidad de tu preferencia para coordinar con nuestros asesores.</p>
+            </div>
+
+            <!-- Options -->
+            <div class="space-y-3.5">
+                <!-- Option A: WhatsApp Direct -->
+                <a id="whatsapp-order-btn" href="https://wa.me/584140000000?text=Hola%20Joyer%C3%ADa%20Cupello,%20quisiera%20cotizar%20una%20joya" target="_blank" class="w-full flex items-center justify-between p-4 bg-obsidian-800 border border-gold-champagne/30 rounded-2xl hover:border-gold-champagne transition group">
+                    <div class="flex items-center space-x-3.5">
+                        <div class="p-2.5 bg-emerald-500/20 text-emerald-400 rounded-xl">
+                            <i data-lucide="message-circle" class="w-5 h-5"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="block font-bold text-white text-sm">Cotizar Joya por WhatsApp</span>
+                            <span class="text-[11px] text-gray-400">Atención personalizada e inmediata</span>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-5 h-5 text-gold-champagne group-hover:translate-x-1 transition"></i>
+                </a>
+
+                <!-- Option B: Custom Piece Request -->
+                <button onclick="closeOrdersModal(); openCustomDesignForm()" class="w-full flex items-center justify-between p-4 bg-obsidian-800 border border-gold-champagne/30 rounded-2xl hover:border-gold-champagne transition group">
+                    <div class="flex items-center space-x-3.5">
+                        <div class="p-2.5 bg-amber-500/20 text-gold-champagne rounded-xl">
+                            <i data-lucide="pen-tool" class="w-5 h-5"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="block font-bold text-white text-sm">Encargo / Joya Personalizada a Medida</span>
+                            <span class="text-[11px] text-gray-400">Envíanos el modelo, gramos o tipo de piedra</span>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-5 h-5 text-gold-champagne group-hover:translate-x-1 transition"></i>
+                </button>
+
+                <!-- Option C: Catalog Selection -->
+                <button onclick="closeOrdersModal(); switchTab('catalog')" class="w-full flex items-center justify-between p-4 bg-obsidian-800 border border-gold-champagne/30 rounded-2xl hover:border-gold-champagne transition group">
+                    <div class="flex items-center space-x-3.5">
+                        <div class="p-2.5 bg-blue-500/20 text-blue-400 rounded-xl">
+                            <i data-lucide="grid" class="w-5 h-5"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="block font-bold text-white text-sm">Explorar Galería de Piezas Disponibles</span>
+                            <span class="text-[11px] text-gray-400">Añade joyas a tu lista de selección</span>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-5 h-5 text-gold-champagne group-hover:translate-x-1 transition"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: SELECTION / CART SLIDE OVER -->
+    <div id="modal-cart" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex justify-end hidden">
+        <div class="bg-obsidian-900 border-l border-obsidian-800 max-w-md w-full h-full p-6 flex flex-col justify-between shadow-2xl space-y-4">
+            <div>
+                <!-- Cart Header -->
+                <div class="flex items-center justify-between pb-4 border-b border-obsidian-800">
+                    <div class="flex items-center space-x-2">
+                        <i data-lucide="shopping-bag" class="w-5 h-5 text-gold-champagne"></i>
+                        <h3 class="text-lg font-serif font-bold text-white uppercase tracking-wider">Tu Selección de Joyas</h3>
+                    </div>
+                    <button onclick="closeCartModal()" class="p-2 text-gray-400 hover:text-white rounded-full bg-obsidian-800">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+
+                <!-- Cart Items -->
+                <div id="cart-items-container" class="py-4 space-y-3 max-h-[60vh] overflow-y-auto custom-scrollbar">
+                    <p class="text-center text-gray-500 text-xs py-8">Tu lista de selección está vacía.<br>Explora nuestro catálogo y agrega tus piezas favoritas.</p>
+                </div>
+            </div>
+
+            <!-- Cart Footer -->
+            <div class="border-t border-obsidian-800 pt-4 space-y-4">
+                <div class="flex justify-between items-center text-base font-bold">
+                    <span class="text-white font-serif">Presupuesto Estimado:</span>
+                    <span id="cart-total-price" class="text-gold-champagne font-extrabold text-lg">$0</span>
+                </div>
+                <button onclick="sendCartToWhatsApp()" class="w-full py-3.5 bg-gradient-to-r from-amber-200 via-gold-champagne to-amber-500 text-black font-extrabold rounded-xl shadow-lg hover:scale-[1.02] active:scale-98 transition flex items-center justify-center space-x-2 uppercase tracking-widest text-xs">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    <span>Solicitar Cotización por WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT APPLICATION LOGIC -->
+    <script>
+        // High Jewelry Catalog Dataset
+        const catalogData = [
+            { id: 1, name: 'Anillo Solitario Imperial Oro Blanco 18K', category: 'anillos', price: 1250000, desc: 'Diamante corte brillante de alta claridad montado en oro blanco de 18 quilates.', image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80', badge: 'Oro 18K' },
+            { id: 2, name: 'Cadena Cubana Italiana Oro Amarillo 18K', category: 'cadenas', price: 890000, desc: 'Tejido pesado clásico de 55 cm, broche de caja con doble traba de seguridad.', image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80', badge: 'Popular' },
+            { id: 3, name: 'Pulsera Riviera Tennis Oro Rosado', category: 'pulseras', price: 680000, desc: 'Engaste continuo estilo Tennis con acabado pulido satinado.', image: 'https://images.unsplash.com/photo-1611591475281-8d9954d26e1d?auto=format&fit=crop&w=600&q=80', badge: 'Exclusivo' },
+            { id: 4, name: 'Zarcillos Argolla Criolla Oro 18K', category: 'zarcillos', price: 340000, desc: 'Argollas acanaladas finas y ligeras con grabado interno de autenticidad.', image: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?auto=format&fit=crop&w=600&q=80', badge: 'Tradicional' },
+            { id: 5, name: 'Dije Cruz del Sur Oro Amarillo & Circones', category: 'cadenas', price: 290000, desc: 'Dije religioso/simbólico fundido con incrustaciones de circones micro-engastados.', image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80', badge: 'Edición Fina' },
+            { id: 6, name: 'Anillo de Bodas / Dueto Eternidad Oro 18K', category: 'anillos', price: 780000, desc: 'Par de alianzas para matrimonio con grabado personalizado de cortesía.', image: 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=600&q=80', badge: 'Matrimonio' },
+            { id: 7, name: 'Esclava Masculina Personalizada Ley 950', category: 'pulseras', price: 220000, desc: 'Placa sólida para grabado de nombre o fecha con tejido resistente.', image: 'https://images.unsplash.com/photo-1611591475281-8d9954d26e1d?auto=format&fit=crop&w=600&q=80', badge: 'Personalizable' },
+            { id: 8, name: 'Reloj Cronógrafo de Lujo Bisel Dorado', category: 'relojes', price: 1450000, desc: 'Maquinaria de alta precisión, cristal de zafiro anti-rayaduras y resistencia al agua.', image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80', badge: 'Alta Gama' }
+        ];
+
+        let cart = [];
+        let activeCategory = 'all';
+
+        // Initialize Icons and render on load
+        window.onload = function() {
+            lucide.createIcons();
+            renderCatalog();
+        };
+
+        // Navigation Switcher
+        function switchTab(tab) {
+            document.querySelectorAll('.view-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('text-gold-champagne'));
+            
+            if (tab === 'home') {
+                document.getElementById('view-home').classList.remove('hidden');
+                document.getElementById('nav-home').classList.add('text-gold-champagne');
+            } else if (tab === 'catalog') {
+                document.getElementById('view-catalog').classList.remove('hidden');
+                document.getElementById('nav-catalog').classList.add('text-gold-champagne');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle Mobile Navigation Drawer
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Render Catalog Items
+        function renderCatalog() {
+            const container = document.getElementById('catalog-grid');
+            const searchVal = document.getElementById('catalog-search').value.toLowerCase();
+            container.innerHTML = '';
+
+            const filtered = catalogData.filter(item => {
+                const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
+                const matchesSearch = item.name.toLowerCase().includes(searchVal) || item.desc.toLowerCase().includes(searchVal);
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-16 text-gray-500 font-serif">No se encontraron piezas en esta categoría.</div>`;
+                return;
+            }
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-obsidian-900 border border-obsidian-800 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-gold-champagne/50 transition duration-300 gold-border-glow";
+                card.innerHTML = `
+                    <div>
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">
+                            <span class="absolute top-3 left-3 bg-obsidian-950/90 text-gold-champagne font-bold text-[10px] px-2.5 py-1 rounded-md border border-gold-champagne/30 uppercase tracking-widest">${item.badge}</span>
+                        </div>
+                        <div class="p-6 space-y-2">
+                            <h3 class="text-base font-serif font-bold text-white">${item.name}</h3>
+                            <p class="text-gray-400 text-xs line-clamp-2 leading-relaxed">${item.desc}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 flex items-center justify-between mt-auto border-t border-obsidian-800/60 pt-4">
+                        <div>
+                            <span class="text-[10px] text-gray-500 block uppercase">Referencial</span>
+                            <span class="text-lg font-extrabold text-gold-champagne">$${item.price.toLocaleString('es-CL')} CLP</span>
+                        </div>
+                        <button onclick="addToCartDirect('${item.name}', ${item.price})" class="px-3.5 py-2 bg-gold-champagne/10 text-gold-champagne hover:bg-gold-champagne hover:text-black font-bold rounded-xl transition flex items-center space-x-1 text-xs uppercase tracking-wider">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                            <span>Seleccionar</span>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        // Filter Category Function
+        function filterCategory(cat) {
+            activeCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('bg-gold-champagne', 'text-black', 'border-gold-champagne');
+                btn.classList.add('bg-obsidian-900', 'text-gray-300', 'border-obsidian-800');
+            });
+            event.currentTarget.classList.add('bg-gold-champagne', 'text-black', 'border-gold-champagne');
+            renderCatalog();
+        }
+
+        // Filter Search Function
+        function filterCatalog() {
+            renderCatalog();
+        }
+
+        // Add to Selection Cart
+        function addToCartDirect(name, price) {
+            const existing = cart.find(i => i.name === name);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ name, price, qty: 1 });
+            }
+            updateCartUI();
+            openCartModal();
+        }
+
+        // Update Cart Interface
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const container = document.getElementById('cart-items-container');
+            const totalPrice = document.getElementById('cart-total-price');
+            
+            const totalItems = cart.reduce((acc, curr) => acc + curr.qty, 0);
+            const totalSum = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
+
+            badge.innerText = totalItems;
+            if (totalItems > 0) {
+                badge.classList.remove('scale-0');
+            } else {
+                badge.classList.add('scale-0');
+            }
+
+            if (cart.length === 0) {
+                container.innerHTML = `<p class="text-center text-gray-500 text-xs py-8">Tu lista de selección está vacía.<br>Explora nuestro catálogo y agrega tus piezas favoritas.</p>`;
+            } else {
+                container.innerHTML = cart.map((item, index) => `
+                    <div class="flex items-center justify-between bg-obsidian-800/80 p-3.5 rounded-xl border border-obsidian-700">
+                        <div>
+                            <span class="font-serif font-bold text-white text-xs block">${item.name}</span>
+                            <span class="text-xs text-gold-champagne font-semibold">$${item.price.toLocaleString('es-CL')} CLP</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="changeQty(${index}, -1)" class="w-6 h-6 bg-obsidian-700 text-white rounded flex items-center justify-center font-bold text-xs hover:bg-obsidian-600">-</button>
+                            <span class="text-xs font-bold text-white w-4 text-center">${item.qty}</span>
+                            <button onclick="changeQty(${index}, 1)" class="w-6 h-6 bg-gold-champagne text-black rounded flex items-center justify-center font-bold text-xs hover:bg-amber-400">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            totalPrice.innerText = `$${totalSum.toLocaleString('es-CL')} CLP`;
+
+            const waBtn = document.getElementById('whatsapp-order-btn');
+            if (cart.length > 0) {
+                let msg = `Hola Joyería Cupello, quisiera solicitar una cotización por las siguientes piezas de mi interés:%0A`;
+                cart.forEach(i => {
+                    msg += `- ${i.qty}x ${i.name}%0A`;
+                });
+                msg += `%0APresupuesto aproximado: $${totalSum.toLocaleString('es-CL')} CLP%0A%0A¿Me podrían brindar detalles de disponibilidad o tiempo de confección?`;
+                waBtn.href = `https://wa.me/584140000000?text=${msg}`;
+            } else {
+                waBtn.href = `https://wa.me/584140000000?text=Hola%20Joyer%C3%ADa%20Cupello,%20quisiera%20cotizar%20una%20joya`;
+            }
+        }
+
+        function changeQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        // Send Cart via WhatsApp
+        function sendCartToWhatsApp() {
+            if (cart.length === 0) {
+                alert('Añade al menos una joya a tu selección para solicitar una cotización.');
+                return;
+            }
+            const totalSum = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
+            let msg = `Hola Joyería Cupello (@joyeria_cupello), me gustaría consultar por la siguiente selección de joyas:%0A%0A`;
+            cart.forEach(i => {
+                msg += `• ${i.qty}x ${i.name}%0A`;
+            });
+            msg += `%0A Total Estimado: $${totalSum.toLocaleString('es-CL')} CLP%0A%0A¿Tienen disponibilidad inmediata o cuál es el tiempo de confección en taller? Gracias.`;
+            window.open(`https://wa.me/584140000000?text=${msg}`, '_blank');
+        }
+
+        function openCustomDesignForm() {
+            const promptMsg = encodeURIComponent("Hola Joyería Cupello, me gustaría cotizar la elaboración de una joya personalizada a medida (tengo una idea/referencia de diseño).");
+            window.open(`https://wa.me/584140000000?text=${promptMsg}`, '_blank');
+        }
+
+        // Modals Management
+        function openOrdersModal() {
+            document.getElementById('modal-orders').classList.remove('hidden');
+        }
+
+        function closeOrdersModal() {
+            document.getElementById('modal-orders').classList.add('hidden');
+        }
+
+        function openCartModal() {
+            document.getElementById('modal-cart').classList.remove('hidden');
+        }
+
+        function closeCartModal() {
+            document.getElementById('modal-cart').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
